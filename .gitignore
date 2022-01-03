@@ -1,15 +1,2 @@
 
-/.idea
-/config.h.gch
-/engine.h.gch
-/gfx.h.gch
-/graphic.h.gch
-/ui.h.gch
-
-/config.o
-/engine.o
-/gfx.o
-/graphic.o
-/main.o
-/ui.o
-/test
+.
