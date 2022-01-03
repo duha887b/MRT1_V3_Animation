@@ -3,6 +3,7 @@
  Haupt-Programm
  */
 
+
 #include "graphic.h"
 #include <stdio.h>
 #include <stdlib.h>
