@@ -1,2 +1,17 @@
 
 config.o
+ui.o
+main.o
+graphic.o
+gfx.o
+engine.o
+
+ui.h.gch
+graphic.h.gch
+gfx.h.gch
+engine.h.gch
+config.h.gch
+
+.idea
+
+animation
