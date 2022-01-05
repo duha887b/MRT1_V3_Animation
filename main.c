@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "runtime_data.h"
 
 // Forwarddeklaration der später definierten Hilfsfunktionen:
 void goodbye_msg(void);
@@ -87,6 +88,7 @@ void farb_demonstration(void)
  */
 int main (void)
 {
+
 	/* registireren einer Hilfsfunktion, welche bei jedem Programmende einen Text ausgibt. */
         init_exit();
 	

@@ -5,13 +5,14 @@ main.o
 graphic.o
 gfx.o
 engine.o
+runtime_data.o
 
 ui.h.gch
 graphic.h.gch
 gfx.h.gch
 engine.h.gch
 config.h.gch
-
+runtime_data.h.gch
 .idea
 
 animation
