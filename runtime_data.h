@@ -23,6 +23,14 @@ typedef enum {
     X,Y,AN_COUNTER,AN_MAX,DELAY,ARRAY,VOID
 }typ;
 
+// Initialisierung der Typen
+typ typ_col = X;
+typ typ_row = Y;
+typ typ_an_counter = AN_COUNTER;
+typ typ_an_max = AN_MAX;
+typ typ_delay =DELAY;
+typ typ_array = ARRAY;
+
 //Inhalt eines List elements
 typedef struct list_el_t{
     struct list_el_t *next;
@@ -66,9 +74,9 @@ void set_animation_maxC(list_header* list, int* maxC);
 long get_delay(list_header* list);
 void set_delay(list_header* list, long* delay);
 
-//definieren des Animationspuffers in der Liste der Daten mit informationen der Liste
-void def_animation_array(list_header * list); //TODO 3.2
-void replace_element_array();
-void delete_array();
+//getter setter array-pointer
+int* get_array(list_header* list);
+void set_array(list_header* list, int* array);
+
 
 #endif //MRT1_V3_ANIMATION_RUNTIME_DATA_H

@@ -25,11 +25,12 @@ void list_header_init(list_header *header) {
 }
 
 // erstellt einen neuen Listenkopf (Liste)
-list_header *list_header_new() {    //erstellen eines neuen list headers
+list_header* list_header_new() {    //erstellen eines neuen list headers
     list_header *new = (list_header *) malloc(sizeof(list_header));
     list_header_init(new);
     return (new);
 }
+/*
 //löscht den inhalt eines listelemts und gibt optional den Speicher von payload frei
 void listelement_deleteMembers(list_element *element, _Bool freePayload) {
 
@@ -40,9 +41,9 @@ void listelement_deleteMembers(list_element *element, _Bool freePayload) {
     element->next = NULL;
     element->typ = NULL;
 }
-
+*/
 //löscht das gesamte listelement und dessesn daten ( evt. deallokieren des Speichers)
-
+/*
 void listelement_delete(list_header *header, list_element *element, _Bool freePayload) {
 
     list_element *tmp;
@@ -84,7 +85,7 @@ void listelement_delete(list_header *header, list_element *element, _Bool freePa
         element = NULL;
     }
 }
-
+*/
 // fügt das listelement einer Liste hinzu und dem listelement seine Daten
 void listelement_append(list_header *l, list_element *le, void *payload, typ *typ) {
 
@@ -116,6 +117,98 @@ void list_clear(list_header *header) {
     header->tail = NULL;
 }
 
+list_header* new_specific_list(){
+    // erzeugen eines neuen Listenkopfes
+    list_header* RuntimeData = list_header_new();
+
+    //erzeugen neuer elemente
+    list_element* x = list_element_new();
+    list_element* y = list_element_new();
+    list_element* counter = list_element_new();
+    list_element* max_count = list_element_new();
+    list_element* delay = list_element_new();
+    list_element* array = list_element_new();
+
+    //anfügen der elemente an die Liste ohne Payload
+    listelement_append(RuntimeData,x,NULL,&typ_col);
+    listelement_append(RuntimeData,y,NULL,&typ_row);
+    listelement_append(RuntimeData,counter,NULL,&typ_an_counter);
+    listelement_append(RuntimeData,max_count,NULL,&typ_an_max);
+    listelement_append(RuntimeData,delay,NULL,&typ_delay);
+    listelement_append(RuntimeData,array,NULL,&typ_array);
+
+    // zurückgeben des Listenkopfes
+    return RuntimeData;
+
+}
+
+// filtern nach gesuchtem Datenpunkt
+list_element* search_data(list_header* header, typ t){
+    list_element *tmp;
+    tmp = header->head;
+
+    if(header->head == NULL && header->tail ==0){
+        printf("\n bad list (no data found) !!!! \n");
+        return NULL;
+    }
+
+    while (tmp != 0){
+        if(*(tmp->typ) == t) {
+            return tmp;
+        }
+
+        tmp = tmp->next;
+    }
+
+
+    return NULL;
+
+}
+
+// auslesen des X wertes aus der Liste
+int get_X(list_header* list){
+    list_element *tmp = search_data(list,X);
+    return *((int*) tmp->payload);
+}
+
+// suchen des Datenpunktes und ersetzten des pointers payload auf eine neue Adresse
+void set_data(list_header *header, typ t,void* payload){
+    list_element *tmp = header->head;
+
+    if(header->head == NULL && header->tail ==0){
+        printf("\n bad list (no element to set !!!! \n");
+        return ;
+    }
+
+    while (tmp != 0){
+        if(*(tmp->typ) == t) {
+            tmp->payload = payload;
+            return ;
+        }
+
+        tmp = tmp->next;
+    }
+    return;
+
+
+}
+void set_X(list_header* list, int* x){
+    set_data(list,X,x);
+    return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //allokieren des speichers fürs array
 int* init_array(unsigned int row,unsigned int col){
     int* array = (int *) malloc(row*col*sizeof (int ));
@@ -134,7 +227,7 @@ void insert_data_array(int* array,int* dimY,int dimX,unsigned int row,unsigned i
 int* get_array_data(int* array,int* dimY,int dimX,unsigned int row,unsigned int col){
     return (int *) (array + row * (dimX) + col);
 }
-/*
+
 int main(){
     int *arr = init_array(2,2);
     insert_data_array(arr,0,0,23);
