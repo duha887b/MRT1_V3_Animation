@@ -118,6 +118,15 @@ void list_clear(list_header *header) {
 }
 
 list_header* new_specific_list(){
+
+    // Achtung wegen Verfügbarkeit ??
+    typ typ_col = X;
+    typ typ_row = Y;
+    typ typ_an_counter = AN_COUNTER;
+    typ typ_an_max = AN_MAX;
+    typ typ_delay =DELAY;
+    typ typ_array = ARRAY;
+
     // erzeugen eines neuen Listenkopfes
     list_header* RuntimeData = list_header_new();
 
@@ -165,10 +174,35 @@ list_element* search_data(list_header* header, typ t){
 
 }
 
-// auslesen des X wertes aus der Liste
+// getter  func.
 int get_X(list_header* list){
     list_element *tmp = search_data(list,X);
     return *((int*) tmp->payload);
+}
+
+int get_Y(list_header* list){
+    list_element *tmp = search_data(list,Y);
+    return *((int*) tmp->payload);
+}
+
+int get_animation_counter(list_header* list){
+    list_element *tmp = search_data(list,AN_COUNTER);
+    return *((int*) tmp->payload);
+}
+
+int get_animation_maxC(list_header* list){
+    list_element *tmp = search_data(list,AN_MAX);
+    return *((int*) tmp->payload);
+}
+
+long get_delay(list_header* list){
+    list_element *tmp = search_data(list,DELAY);
+    return *((long*) tmp->payload);
+}
+
+int* get_array(list_header* list){
+    list_element *tmp = search_data(list,ARRAY);
+    return ((int*) tmp->payload);
 }
 
 // suchen des Datenpunktes und ersetzten des pointers payload auf eine neue Adresse
@@ -192,8 +226,34 @@ void set_data(list_header *header, typ t,void* payload){
 
 
 }
+//setter func.
 void set_X(list_header* list, int* x){
     set_data(list,X,x);
+    return;
+}
+
+void set_Y(list_header* list, int* y){
+    set_data(list,Y,y);
+    return;
+}
+
+void set_animation_counter(list_header* list, int* counter){
+    set_data(list,AN_COUNTER,counter);
+    return;
+}
+
+void set_animation_maxC(list_header* list, int* maxC){
+    set_data(list,AN_MAX,maxC);
+    return;
+}
+
+void set_delay(list_header* list, long* delay){
+    set_data(list,DELAY,delay);
+    return;
+}
+
+void set_array(list_header* list, int* array){
+    set_data(list,ARRAY,array);
     return;
 }
 
@@ -219,11 +279,11 @@ void del_array(int* array){
     free(array);
 }
 
-//einfügen von daten an bestimmten punkt (0,0 erste position) //TODO non functional
+//einfügen von daten an bestimmten punkt (0,0 erste position)
 void insert_data_array(int* array,int* dimY,int dimX,unsigned int row,unsigned int col,int payload){
     *(array + row* (dimX) + col) = payload;
 }
-//TODO non functional
+
 int* get_array_data(int* array,int* dimY,int dimX,unsigned int row,unsigned int col){
     return (int *) (array + row * (dimX) + col);
 }

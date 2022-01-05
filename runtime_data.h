@@ -23,13 +23,7 @@ typedef enum {
     X,Y,AN_COUNTER,AN_MAX,DELAY,ARRAY,VOID
 }typ;
 
-// Initialisierung der Typen
-typ typ_col = X;
-typ typ_row = Y;
-typ typ_an_counter = AN_COUNTER;
-typ typ_an_max = AN_MAX;
-typ typ_delay =DELAY;
-typ typ_array = ARRAY;
+
 
 //Inhalt eines List elements
 typedef struct list_el_t{
