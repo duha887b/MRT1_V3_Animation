@@ -11,7 +11,7 @@ void list_element_init(list_element *element) {
     element->typ = NULL;
 }
 //erstellt ein neues Listelement und initialisiert die daten
-list_element* list_element_new() {                              //erstellen eines neuen listelemts allokation des Speichers
+list_element* list_element_new() {
 
     list_element *new = (list_element *) malloc(sizeof(list_element));
     list_element_init(new);

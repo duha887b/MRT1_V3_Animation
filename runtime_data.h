@@ -40,7 +40,7 @@ typedef struct list_t{
 
 //Schnittstelle
 
-//erstellen einer Liste mit den Elemnten (X,Y,AN_COUNTER,AN_MAX,DELAY,ARRAY)
+//erstellen einer Liste mit den Element (X,Y,AN_COUNTER,AN_MAX,DELAY,ARRAY)
 list_header* new_specific_list();
 
 // anderes Element des typs void der Liste hinzufügen
