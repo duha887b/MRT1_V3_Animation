@@ -161,7 +161,7 @@ list_element* search_data(list_header* header, typ t){
         return NULL;
     }
 
-    while (tmp != 0){
+    while (tmp != NULL){
         if(*(tmp->typ) == t) {
             return tmp;
         }
@@ -214,7 +214,7 @@ void set_data(list_header *header, typ t,void* payload){
         return ;
     }
 
-    while (tmp != 0){
+    while (tmp != NULL){
         if(*(tmp->typ) == t) {
             tmp->payload = payload;
             return ;
