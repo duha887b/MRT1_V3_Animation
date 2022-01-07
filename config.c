@@ -31,6 +31,8 @@ void read_settings(list_header *list,char* path){
     int integer;
     size_t len = 0;
     ssize_t read;
+    fscanf
+
 
 
 
