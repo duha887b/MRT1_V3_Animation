@@ -4,7 +4,7 @@
 
 #include "runtime_data.h"
 
-//initialisierung eines listelements
+//initialisierung eines list-elements
 void list_element_init(list_element *element) {
     element->next = NULL;
     element->payload = NULL;
@@ -42,7 +42,7 @@ void listelement_deleteMembers(list_element *element, _Bool freePayload) {
     element->typ = NULL;
 }
 */
-//löscht das gesamte listelement und dessesn daten ( evt. deallokieren des Speichers)
+//löscht das gesamte listelement und dessen daten ( evt. deallokieren des Speichers)
 /*
 void listelement_delete(list_header *header, list_element *element, _Bool freePayload) {
 
@@ -156,7 +156,7 @@ list_element* search_data(list_header* header, typ t){
     list_element *tmp;
     tmp = header->head;
 
-    if(header->head == NULL && header->tail ==0){
+    if(header->head == NULL && header->tail == NULL){
         printf("\n bad list (no data found) !!!! \n");
         return NULL;
     }
@@ -210,7 +210,7 @@ void set_data(list_header *header, typ t,void* payload){
     list_element *tmp = header->head;
 
     if(header->head == NULL && header->tail ==0){
-        printf("\n bad list (no element to set !!!! \n");
+        printf("\n bad list (no element to set !!!!) \n");
         return ;
     }
 
