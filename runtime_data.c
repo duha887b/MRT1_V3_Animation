@@ -209,7 +209,7 @@ int* get_array(list_header* list){
 void set_data(list_header *header, typ t,void* payload){
     list_element *tmp = header->head;
 
-    if(header->head == NULL && header->tail ==0){
+    if(header->head == NULL && header->tail == NULL){
         printf("\n bad list (no element to set !!!!) \n");
         return ;
     }
