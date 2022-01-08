@@ -258,7 +258,10 @@ void set_array(list_header* list, int* array){
 }
 
 
-
+int* new_array(list_header* list){
+    int* array = (int *)malloc((get_X(list)+2)*(get_Y(list)+2)*sizeof (int ));
+    return array;
+}
 
 
 
