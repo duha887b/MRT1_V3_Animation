@@ -119,13 +119,21 @@ void list_clear(list_header *header) {
 
 list_header* new_specific_list(){
 
-    // Achtung wegen Verfügbarkeit ??
-    typ typ_col = X;
-    typ typ_row = Y;
-    typ typ_an_counter = AN_COUNTER;
-    typ typ_an_max = AN_MAX;
-    typ typ_delay =DELAY;
-    typ typ_array = ARRAY;
+    // speicher für daten allokieren
+    typ* typ_col = (typ*) malloc(sizeof (typ));
+    *typ_col = X;
+    typ *typ_row = (typ*) malloc(sizeof (typ));
+    *typ_row = Y;
+    typ *typ_an_counter = (typ*) malloc(sizeof (typ));
+    *typ_an_counter = AN_COUNTER;
+    typ *typ_an_max = (typ*) malloc(sizeof (typ));
+    *typ_an_max = AN_MAX;
+    typ *typ_delay =(typ*) malloc(sizeof (typ));
+    *typ_delay = DELAY;
+    typ *typ_array = (typ*) malloc(sizeof (typ));
+    *typ_array = ARRAY;
+
+
 
     // erzeugen eines neuen Listenkopfes
     list_header* RuntimeData = list_header_new();
@@ -139,12 +147,12 @@ list_header* new_specific_list(){
     list_element* array = list_element_new();
 
     //anfügen der elemente an die Liste ohne Payload
-    listelement_append(RuntimeData,x,NULL,&typ_col);
-    listelement_append(RuntimeData,y,NULL,&typ_row);
-    listelement_append(RuntimeData,counter,NULL,&typ_an_counter);
-    listelement_append(RuntimeData,max_count,NULL,&typ_an_max);
-    listelement_append(RuntimeData,delay,NULL,&typ_delay);
-    listelement_append(RuntimeData,array,NULL,&typ_array);
+    listelement_append(RuntimeData,x,NULL,typ_col);
+    listelement_append(RuntimeData,y,NULL,typ_row);
+    listelement_append(RuntimeData,counter,NULL,typ_an_counter);
+    listelement_append(RuntimeData,max_count,NULL,typ_an_max);
+    listelement_append(RuntimeData,delay,NULL,typ_delay);
+    listelement_append(RuntimeData,array,NULL,typ_array);
 
     // zurückgeben des Listenkopfes
     return RuntimeData;
