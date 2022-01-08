@@ -193,9 +193,9 @@ int get_Y(list_header* list){
     return *((int*) tmp->payload);
 }
 
-int get_animation_counter(list_header* list){
+int* get_animation_counter(list_header* list){
     list_element *tmp = search_data(list,AN_COUNTER);
-    return *((int*) tmp->payload);
+    return ((int*) tmp->payload);
 }
 
 int get_animation_maxC(list_header* list){
