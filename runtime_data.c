@@ -157,7 +157,7 @@ list_element* search_data(list_header* header, typ t){
     tmp = header->head;
 
     if(header->head == NULL && header->tail == NULL){
-        printf("\n bad list (no data found) !!!! \n");
+        fprintf(stderr," bad list (no data found) !!!! ");
         return NULL;
     }
 
@@ -210,7 +210,7 @@ void set_data(list_header *header, typ t,void* payload){
     list_element *tmp = header->head;
 
     if(header->head == NULL && header->tail == NULL){
-        printf("\n bad list (no element to set !!!!) \n");
+        fprintf(stderr," bad list (no element to set !!!!) ");
         return ;
     }
 
