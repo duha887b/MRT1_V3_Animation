@@ -23,7 +23,7 @@ int field_content_conversion(char c) {
     return 0;
 }
 
-long getdelay_ms (char string[]){
+long getdelay_ms (char string[]){       //Bestimmen des Delays(Pause) in ms
     int tmp=0,i=0;
     float f=0;
     long f_l=0;
@@ -31,21 +31,18 @@ long getdelay_ms (char string[]){
 
     while (tmp<1) {
         int cmp = (unsigned char) string[i];
-        printf("%i",string[i]);
-        if (cmp>47 && cmp<58) {tmp=1;break;}
+        if (cmp>47 && cmp<58) {tmp=1;break;}        //überprüfen ob char eine Zahl ist
         i++;
     }
-    const char *end_float = &string[length-i+1];
-    sscanf(end_float,"%f",&f);
+    const char *end_float = &string[length-i+1];    //string vor Pause entfernen
+    sscanf(end_float,"%f",&f);             //float aus übrigem string bestimmen
 
-    f=roundf((f*1000));
+    f=roundf((f*1000));                            //s to ms
     f_l = (long) f;
 
     return f_l;
 }
 
-// du setzt nirgends deine Elemte auf speicherbereiche die nicht überschrieben werden können
-// speicher wird vom main stack überschrieben wenn die funktion fertig ist
 void read_settings(list_header *list,char* path){
     int* x = (int*) malloc(sizeof (int));
     int* y = (int*) malloc(sizeof (int));
@@ -100,38 +97,38 @@ void read_settings(list_header *list,char* path){
 
         if (strcmp(line,"\n")==0 && puffer_reached==1) {         //Prüfen auf Ende des Dokuments
 
-            int array = new_array(list);
-            int cols = get_X(list)+2;
-            int rows = get_Y(list)+2;
-            int fields = (cols)*(rows);
+            int *array = new_array(list);
+            int cols = get_X(list)+2;                           //Spalten des Bilds + 2
+            int rows = get_Y(list)+2;                           //Zeilen des Bilds + 2
+            int fields = (cols)*(rows);                         //Gesamtanzahl der Felder
 
-            int puffer_size = (int) strlen(puffer);
-            int puffer_cols = puffer_size/puffer_rows;
+            int puffer_size = (int) strlen(puffer);           //Größe des Puffers(aus Datei)
+            int puffer_cols = puffer_size/puffer_rows;           //Spalten des Puffers
 
-            int space_l_r = (cols-puffer_cols)/2;
-            int space_t_b = (rows-puffer_rows)/2;
+            int space_l_r = (cols-puffer_cols)/2;                //Platz jeweils am linken und rechten Rand
+            int space_t_b = (rows-puffer_rows)/2;                //Platz jeweils am oberen und unteren Rand
 
             int i,j;
-            int index=space_t_b*rows+2*space_l_r;
+            int index=space_t_b*rows+2*space_l_r;                //start index für array
             int field_content;
 
-            memset(array,0, fields);
+            memset(array,0, fields);                     //array auf 0 initialisieren
 
             if (((fields-puffer_size)%2)==1){
                 fprintf(stderr, "\n Mittige Platzierung des Puffers nicht möglich.\n");
                 exit(1);
             }
 
-            for (i=0;i<puffer_rows;i++) {
-                index=index+i*2*space_l_r+i*puffer_cols;
-                for (j=0;j<puffer_cols;j++) {
-                    field_content= field_content_conversion(puffer[i*puffer_cols+j-1]);
-                    array[index+j]=field_content;
+            for (i=0;i<puffer_rows;i++) {                           //Iteration über Reihen des Puffers
+                index=index+i*2*space_l_r+i*puffer_cols;            //Sprung um 2*Platz-links/rechts + Spalten des Puffers
+                for (j=0;j<puffer_cols;j++) {                       //Iteration über Spalten des Puffers
+                    field_content= field_content_conversion(puffer[i*puffer_cols+j]);
+                    array[index+j+1]=field_content;
                 }
 
             }
 
-            set_array(list, array); // NULL array
+            set_array(list, array); //array zu Laufzeit Daten hinzufügen
 
         };
 
@@ -171,11 +168,8 @@ void read_settings(list_header *list,char* path){
         if (puffer_reached==1) {                           //Animations-Puffer wurde erreicht
             strcat(puffer,string);                //zusammenfügen der Einzelnen Datei-Puffer Zeilen
             puffer_rows = puffer_rows+1;
-            printf("\n %s", puffer);
+            //printf("\n %s", puffer);
         }
-
-        //fscanf(line, "%i", &integer);
-        //printf("\n %s,%i",string);
 
     }
 
