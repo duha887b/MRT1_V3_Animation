@@ -14,18 +14,34 @@
 #include <stdlib.h>
 // Config und Dateiarbeit Funktionen
 #define _GNU_SOURCE
-
-long s_to_ms (float* f){
-    long f_l = (long)f;
-    f_l = f_l*1000;
-    return f_l;
-
-}
+#include <math.h>
 
 int field_content_conversion(char c) {
     if (c=='x') return 1;
     if (c=='.') return 0;
 
+    return 0;
+}
+
+long getdelay_ms (char string[]){
+    int tmp=0,i=0;
+    float f=0;
+    long f_l=0;
+    unsigned long length = strlen(string);
+
+    while (tmp<1) {
+        int cmp = (unsigned char) string[i];
+        printf("%i",string[i]);
+        if (cmp>47 && cmp<58) {tmp=1;break;}
+        i++;
+    }
+    const char *end_float = &string[length-i+1];
+    sscanf(end_float,"%f",&f);
+
+    f=roundf((f*1000));
+    f_l = (long) f;
+
+    return f_l;
 }
 
 // du setzt nirgends deine Elemte auf speicherbereiche die nicht überschrieben werden können
@@ -52,9 +68,6 @@ void read_settings(list_header *list,char* path){
     int puffer_rows = 0;
     size_t len = 0;
     ssize_t read;
-
-
-
 
 
 
@@ -87,9 +100,9 @@ void read_settings(list_header *list,char* path){
 
         if (strcmp(line,"\n")==0 && puffer_reached==1) {         //Prüfen auf Ende des Dokuments
 
-            int *array = new_array(list); //??? kannn nicht inzialisieren da liste X,Y noch leer
-            int cols = get_X(list)+2;  //??? noch 0 da liste leer
-            int rows = get_Y(list)+2;//??? ebenso noch nicht definiert
+            int array = new_array(list);
+            int cols = get_X(list)+2;
+            int rows = get_Y(list)+2;
             int fields = (cols)*(rows);
 
             int puffer_size = (int) strlen(puffer);
@@ -102,7 +115,7 @@ void read_settings(list_header *list,char* path){
             int index=space_t_b*rows+2*space_l_r;
             int field_content;
 
-            memset(list,0, fields);
+            memset(array,0, fields);
 
             if (((fields-puffer_size)%2)==1){
                 fprintf(stderr, "\n Mittige Platzierung des Puffers nicht möglich.\n");
@@ -120,30 +133,34 @@ void read_settings(list_header *list,char* path){
 
             set_array(list, array); // NULL array
 
-
         };
 
         if (strcmp(line,"\n")==0) continue;         //Leere Zeile überspringen
 
         if(strncmp(string,"Zeilen",6)==0) {
-            set_Y(list, &integer);
+            *y = integer;
+            set_Y(list, y);
             printf("%i", get_Y(list));
         }
         else if(strncmp(string,"Spalten",7)==0) {
-            set_X(list,&integer);
+            *x = integer;
+            set_X(list,x);
             printf("%i", get_X(list));
         }
         else if(strncmp(string,"Schritt:",8)==0) {
-            set_animation_counter(list, &integer);  // warum???
+            *an_counter = integer,
+            set_animation_counter(list, an_counter);  // warum???
             printf("%i",*get_animation_counter(list));
         }
         else if(strncmp(string,"Schritte",8)==0) {
-            set_animation_maxC(list, &integer);
+            *an_max = integer;
+            set_animation_maxC(list, an_max);
             printf("%i", get_animation_maxC(list));
         }
         else if(strncmp(string,"Pause",5)==0) {
-            sscanf(line, "%f", &f);
-            set_delay(list, s_to_ms(&f));
+            long tmp = getdelay_ms(line);
+            *delay= tmp;
+            set_delay(list, delay);
             printf("%ld", get_delay(list));
         }
         else if(strncmp(string, "Animations-Puffer",16)==0) {
@@ -158,10 +175,7 @@ void read_settings(list_header *list,char* path){
         }
 
         //fscanf(line, "%i", &integer);
-        printf("\n %s,%i",string,integer);
-
-
-
+        //printf("\n %s,%i",string);
 
     }
 
