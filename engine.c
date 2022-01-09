@@ -6,7 +6,6 @@
 #include "engine.h"
 #include "runtime_data.h"
 
-//TODO get pixel of matrix --> add around pixels --> check
 
 
 
