@@ -26,9 +26,10 @@ int field_content_conversion(char c) {
     if (c=='x') return 1;
     if (c=='.') return 0;
 
-};
+}
 
-
+// du setzt nirgends deine Elemte auf speicherbereiche die nicht überschrieben werden können
+// speicher wird vom main stack überschrieben wenn die funktion fertig ist
 void read_settings(list_header *list,char* path){
     int* x = (int*) malloc(sizeof (int));
     int* y = (int*) malloc(sizeof (int));
@@ -86,9 +87,9 @@ void read_settings(list_header *list,char* path){
 
         if (strcmp(line,"\n")==0 && puffer_reached==1) {         //Prüfen auf Ende des Dokuments
 
-            int *array = new_array(list);
-            int cols = get_X(list)+2;
-            int rows = get_Y(list)+2;
+            int *array = new_array(list); //??? kannn nicht inzialisieren da liste X,Y noch leer
+            int cols = get_X(list)+2;  //??? noch 0 da liste leer
+            int rows = get_Y(list)+2;//??? ebenso noch nicht definiert
             int fields = (cols)*(rows);
 
             int puffer_size = (int) strlen(puffer);
@@ -117,7 +118,7 @@ void read_settings(list_header *list,char* path){
 
             }
 
-            set_array(list, array);
+            set_array(list, array); // NULL array
 
 
         };
@@ -133,8 +134,8 @@ void read_settings(list_header *list,char* path){
             printf("%i", get_X(list));
         }
         else if(strncmp(string,"Schritt:",8)==0) {
-            set_animation_counter(list, &integer);
-            printf("%i",get_animation_counter(list));
+            set_animation_counter(list, &integer);  // warum???
+            printf("%i",*get_animation_counter(list));
         }
         else if(strncmp(string,"Schritte",8)==0) {
             set_animation_maxC(list, &integer);
