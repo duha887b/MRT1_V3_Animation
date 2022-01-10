@@ -57,11 +57,9 @@ void read_settings(list_header *list,char* path){
     char string[256];
     char puffer[256];
     int integer = 0;
-    float f = 0;
     int puffer_reached = 0;
     int puffer_rows = 0;
     size_t len = 0;
-    ssize_t read;
 
     // Fehlererkennung
     unsigned long length = strlen(path);
@@ -82,7 +80,7 @@ void read_settings(list_header *list,char* path){
     //Ende Fehlererkennung
 
 
-    while ((read = getline(&line, &len, file)) != -1) {
+    while ((getline(&line, &len, file)) != -1) {
 
         integer = 0;
 
@@ -179,8 +177,5 @@ void read_settings(list_header *list,char* path){
     free(an_counter);
     free(an_max);
     free(delay);
-
-
-
 }
 
