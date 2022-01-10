@@ -135,6 +135,7 @@ void read_settings(list_header *list,char* path){
             }
         }
 
+
         if (strcmp(line,"\n")==0) continue;         //Leere Zeile überspringen
 
         if(strncmp(string,"Zeilen",6)==0) {
@@ -169,13 +170,7 @@ void read_settings(list_header *list,char* path){
         }
     }
 
-    perror("\n config");
+     perror("\n config");
 
-
-    free(x);
-    free(y);
-    free(an_counter);
-    free(an_max);
-    free(delay);
 }
 
