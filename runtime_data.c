@@ -4,13 +4,13 @@
 
 #include "runtime_data.h"
 
-//initialisierung eines list-elements
+//Initialisierung eines list-elements
 void list_element_init(list_element *element) {
     element->next = NULL;
     element->payload = NULL;
     element->typ = NULL;
 }
-//erstellt ein neues Listelement und initialisiert die daten
+//erstellt ein neues list-elements und initialisiert die Daten
 list_element* list_element_new() {
 
     list_element *new = (list_element *) malloc(sizeof(list_element));
@@ -25,68 +25,13 @@ void list_header_init(list_header *header) {
 }
 
 // erstellt einen neuen Listenkopf (Liste)
-list_header* list_header_new() {    //erstellen eines neuen list headers
+list_header* list_header_new() {
     list_header *new = (list_header *) malloc(sizeof(list_header));
     list_header_init(new);
     return (new);
 }
-/*
-//löscht den inhalt eines listelemts und gibt optional den Speicher von payload frei
-void listelement_deleteMembers(list_element *element, _Bool freePayload) {
 
-    if(freePayload){
-        free(element->payload);
-    }
-    element->payload = NULL;
-    element->next = NULL;
-    element->typ = NULL;
-}
-*/
-//löscht das gesamte listelement und dessen daten ( evt. deallokieren des Speichers)
-/*
-void listelement_delete(list_header *header, list_element *element, _Bool freePayload) {
-
-    list_element *tmp;
-    list_element *del;
-
-    tmp = header->head;
-
-    if (tmp == element) {            //delete head element
-
-        if(tmp->next == NULL){      // if head element is the last element
-            header->tail = NULL;
-            header->head = NULL;
-            goto next;
-        }
-
-        header->head = (list_element *) tmp->next;
-        goto next;
-    }
-
-    while (tmp->next != NULL) {
-        if (tmp->next == element) {
-
-            del = (list_element *) tmp->next;
-            tmp->next = del->next;
-
-            if (tmp->next == NULL) {
-                header->tail = tmp;
-            }
-
-            goto next;
-        }
-        tmp = tmp->next;
-    }
-
-    next:
-    listelement_deleteMembers(element,freePayload);         // clear or delete members of list_element
-    if(freePayload){
-        free(element);                                      //deallocate element himself
-        element = NULL;
-    }
-}
-*/
-// fügt das listelement einer Liste hinzu und dem listelement seine Daten
+// fügt das list-element einer Liste hinzu und dem list-element seine Daten
 void listelement_append(list_header *l, list_element *le, void *payload, typ *typ) {
 
     // no elements
@@ -111,15 +56,16 @@ void listelement_append(list_header *l, list_element *le, void *payload, typ *ty
     l->tail = le;
 
 }
-//gesamter inhalt der Liste wird vom header gelöst (z.B zum neubefüllen der List)
+//gesamter Inhalt der Liste wird vom header gelöst (z.B. zum neubefüllen der List)
 void list_clear(list_header *header) {
     header->head = NULL;
     header->tail = NULL;
 }
 
+// erstellt die eine Liste mit den der Aufgabe entsprechenden Elementen
 list_header* new_specific_list(){
 
-    // speicher für daten allokieren
+    // speicher für Datentyp der list-elemente allokieren
     typ* typ_col = (typ*) malloc(sizeof (typ));
     *typ_col = X;
     typ *typ_row = (typ*) malloc(sizeof (typ));
@@ -138,7 +84,7 @@ list_header* new_specific_list(){
     // erzeugen eines neuen Listenkopfes
     list_header* RuntimeData = list_header_new();
 
-    //erzeugen neuer elemente
+    //erzeugen neuer Elemente
     list_element* x = list_element_new();
     list_element* y = list_element_new();
     list_element* counter = list_element_new();
@@ -146,7 +92,7 @@ list_header* new_specific_list(){
     list_element* delay = list_element_new();
     list_element* array = list_element_new();
 
-    //anfügen der elemente an die Liste ohne Payload
+    //anfügen der Elemente an die Liste ohne Payload
     listelement_append(RuntimeData,x,NULL,typ_col);
     listelement_append(RuntimeData,y,NULL,typ_row);
     listelement_append(RuntimeData,counter,NULL,typ_an_counter);
@@ -164,21 +110,23 @@ list_element* search_data(list_header* header, typ t){
     list_element *tmp;
     tmp = header->head;
 
+    // Abbruch, wenn die Liste leer ist
     if(header->head == NULL && header->tail == NULL){
         fprintf(stderr," bad list (no data found) !!!! ");
         return NULL;
     }
 
+    // iterieren über die Liste bis des Elements des gewünschten Typs gefunden wird
     while (tmp != NULL){
         if(*(tmp->typ) == t) {
-            return tmp;
+            return tmp;     // gibt das passende Element des gesuchten typs zurück
         }
 
         tmp = tmp->next;
     }
 
 
-    return NULL;
+    return NULL; // wenn kein entsprechendes Element gefunden wurde
 
 }
 
@@ -213,7 +161,7 @@ int* get_array(list_header* list){
     return ((int*) tmp->payload);
 }
 
-// suchen des Datenpunktes und ersetzten des pointers payload auf eine neue Adresse
+// suchen des Datenpunktes und ersetzten des Pointers payload auf eine neue Adresse
 void set_data(list_header *header, typ t,void* payload){
     list_element *tmp = header->head;
 
@@ -222,9 +170,9 @@ void set_data(list_header *header, typ t,void* payload){
         return ;
     }
 
-    while (tmp != NULL){
+    while (tmp != NULL){  //iterieren bis Element gefunden
         if(*(tmp->typ) == t) {
-            tmp->payload = payload;
+            tmp->payload = payload; //setzten des neuen Pointers
             return ;
         }
 
@@ -265,49 +213,8 @@ void set_array(list_header* list, int* array){
     return;
 }
 
-
+// allokiert im Speicher einen bereich welcher ein Array in der geforderten Größe fassen kann
 int* new_array(list_header* list){
     int* array = (int *)malloc((get_X(list)+2)*(get_Y(list)+2)*sizeof (int ));
     return array;
 }
-
-
-
-
-
-
-
-
-
-/*
-//allokieren des speichers fürs array
-int* init_array(unsigned int row,unsigned int col){
-    int* array = (int *) malloc(row*col*sizeof (int ));
-    return array;
-}
-
-void del_array(int* array){
-    free(array);
-}
-
-//einfügen von daten an bestimmten punkt (0,0 erste position)
-void insert_data_array(int* array,int* dimY,int dimX,unsigned int row,unsigned int col,int payload){
-    *(array + row* (dimX) + col) = payload;
-}
-
-int* get_array_data(int* array,int* dimY,int dimX,unsigned int row,unsigned int col){
-    return (int *) (array + row * (dimX) + col);
-}
-
-int main(){
-    int *arr = init_array(2,2);
-    insert_data_array(arr,0,0,23);
-    insert_data_array(arr,0,1,7);
-    insert_data_array(arr,1,0,13);
-    insert_data_array(arr,1,1,9);
-
-    printf("\n%d", *(get_array_data(arr,0,0)));
-
-    return 0;
-}
-*/
