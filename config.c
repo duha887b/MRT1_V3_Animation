@@ -109,7 +109,7 @@ void read_settings(list_header *list,char* path){
             int space_t_b = (rows-puffer_rows)/2;                //Platz jeweils am oberen und unteren Rand
 
             int i,j;
-            int index=space_t_b*rows+2*space_l_r;                //start index für array
+            int index=space_t_b*cols+space_l_r;                //start index für array
             int field_content;
 
             memset(array,0, fields);                     //array auf 0 initialisieren
@@ -120,15 +120,23 @@ void read_settings(list_header *list,char* path){
             }
 
             for (i=0;i<puffer_rows;i++) {                           //Iteration über Reihen des Puffers
-                index=index+i*2*space_l_r+i*puffer_cols;            //Sprung um 2*Platz-links/rechts + Spalten des Puffers
+                index=index+puffer_cols+2*space_l_r;            //Sprung um 2*Platz-links/rechts + Spalten des Puffers
                 for (j=0;j<puffer_cols;j++) {                       //Iteration über Spalten des Puffers
                     field_content= field_content_conversion(puffer[i*puffer_cols+j]);
                     array[index+j+1]=field_content;
                 }
-
             }
 
             set_array(list, array); //array zu Laufzeit Daten hinzufügen
+
+            int m,n;
+
+            for (m=0;m<rows;m++) {
+                printf("\n");
+                for (n=0;n<cols;n++){
+                    printf("%i",array[m*cols+n]);
+                }
+            }
 
         };
 
