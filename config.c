@@ -112,7 +112,7 @@ void read_settings(list_header *list,char* path){
             memset(array,0, fields);                   //array auf 0 initialisieren
 
             if (((fields-puffer_size)%2)==1 || (cols_even==1) || (rows_even==1)){
-                fprintf(stderr, "\n Mittige Platzierung des Puffers nicht möglich.\n");
+                fprintf(stderr, "\n\n Mittige Platzierung des Puffers nicht möglich.\n");
             }
 
             if (cols_even == 1) transfer=1;
@@ -132,7 +132,7 @@ void read_settings(list_header *list,char* path){
             for (m=0;m<rows;m++) {
                 printf("\n");
                 for (n=0;n<cols;n++){
-                    printf("%i",array[m*cols+n]);
+                    printf("%i ",array[m*cols+n]);
                 }
             }
         }
@@ -142,28 +142,23 @@ void read_settings(list_header *list,char* path){
         if(strncmp(string,"Zeilen",6)==0) {
             *y = integer;
             set_Y(list, y);
-            printf("%i", get_Y(list));
         }
         else if(strncmp(string,"Spalten",7)==0) {
             *x = integer;
             set_X(list,x);
-            printf("%i", get_X(list));
         }
         else if(strncmp(string,"Schritt:",8)==0) {
             *an_counter = integer,
             set_animation_counter(list, an_counter);
-            printf("%i",*get_animation_counter(list));
         }
         else if(strncmp(string,"Schritte",8)==0) {
             *an_max = integer;
             set_animation_maxC(list, an_max);
-            printf("%i", get_animation_maxC(list));
         }
         else if(strncmp(string,"Pause",5)==0) {
             long tmp = getdelay_ms(line);
             *delay= tmp;
             set_delay(list, delay);
-            printf("%ld", get_delay(list));
         }
         else if(strncmp(string, "Animations-Puffer",16)==0) {
             puffer_reached = 1;
@@ -177,6 +172,15 @@ void read_settings(list_header *list,char* path){
     }
 
     perror("\n config");
+
+
+    free(x);
+    free(y);
+    free(an_counter);
+    free(an_max);
+    free(delay);
+
+
 
 }
 
