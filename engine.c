@@ -5,6 +5,7 @@
 
 #include "engine.h"
 #include "runtime_data.h"
+#include <string.h>
 
 
 
@@ -19,24 +20,16 @@ void cal_nextAnimaionStep(list_header* list){
 
     int* counter = get_animation_counter(list); //pointer des Animationscounters holen
 
-/*
-   // Temporärer code
-   for (int i = 0; i < rows * cols; i++)
-        current_array[i] = 0;
-
-   //current_array[m*cols+n]
-    current_array[1*cols+0] = 1;
-    current_array[1*cols+1] = 1;
-    current_array[2*cols+0] = 1;
-    current_array[2*cols+1] = 1;
 
 
+//temp code
+    printf("\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++)
             printf("%d ", current_array[i * cols + j]);
         printf("\n");
     }
-    */
+//
 
 
 
@@ -91,9 +84,13 @@ void cal_nextAnimaionStep(list_header* list){
     }
 */
     *counter = *counter+1;
-    current_array = next_array;
-/*
+    memcpy(current_array, next_array, (get_X(list)+2)*(get_Y(list)+2)*sizeof (int ));
+
+    free(next_array);
+
+// temp
     printf("_____________________\n");
+
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++)
@@ -101,7 +98,7 @@ void cal_nextAnimaionStep(list_header* list){
         printf("\n");
     }
         printf("counter:%d",*counter);
-        */
+
 }
 
 
