@@ -92,22 +92,21 @@ void farb_demonstration(void)
 int main (void)
 {
 
-    list_header *Liste = new_specific_list();
-    read_settings(Liste,"settings-test.txt");
+
 	/* registireren einer Hilfsfunktion, welche bei jedem Programmende einen Text ausgibt. */
-       // init_exit();
+        init_exit();
 	
         /* Initialisierung des Grafikausgabefensters
 	 Hinweis: das Fenster ist immer 800x600 Pixel groß */
-        //grafik_init_window();
+        grafik_init_window();
 
 	/* eine Demo um die Grafikfunktionen zu demonstrieren */
-	//farb_demonstration();
+	    farb_demonstration();
 
          /* Aufräumen und Freigeben der benutzten Grafikressourcen */
-      //  grafik_close_window();
+        grafik_close_window();
         
-        //return 0;
+        return 0;
 }
 
 
