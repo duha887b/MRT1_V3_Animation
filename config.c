@@ -26,7 +26,7 @@ int field_content_conversion(char c) {
 long getdelay_ms (char string[]){       //Bestimmen des Delays(Pause) in ms
     int tmp=0,i=0;
     float f=0;
-    long f_l=0;
+    long f_l;
     unsigned long length = strlen(string);
 
     while (tmp<1) {
@@ -50,14 +50,11 @@ void read_settings(list_header *list,char* path){
     int* an_max = (int*) malloc(sizeof (int));
     long* delay = (long*) malloc(sizeof (long));
 
-
     FILE *file;
     file = fopen(path,"r");
 
     char * line = NULL;
     char string[256];
-    char string1[256];
-    char empty[1] = "";
     char puffer[256];
     int integer = 0;
     float f = 0;
@@ -65,8 +62,6 @@ void read_settings(list_header *list,char* path){
     int puffer_rows = 0;
     size_t len = 0;
     ssize_t read;
-
-
 
     // Fehlererkennung
     unsigned long length = strlen(path);
@@ -79,7 +74,6 @@ void read_settings(list_header *list,char* path){
     }
 
 
-
     if(file == NULL){
         fprintf( stderr, "\nfile (%s) doesn't exist\n",path);
         return;
@@ -87,9 +81,8 @@ void read_settings(list_header *list,char* path){
 
     //Ende Fehlererkennung
 
+
     while ((read = getline(&line, &len, file)) != -1) {
-        //printf("Retrieved line of length %zu:\n", read);
-        //printf("%s", line);
 
         integer = 0;
 
@@ -109,18 +102,23 @@ void read_settings(list_header *list,char* path){
             int space_t_b = (rows-puffer_rows)/2;                //Platz jeweils am oberen und unteren Rand
 
             int i,j;
-            int index=space_t_b*cols+space_l_r;                //start index für array
+            int index=(space_t_b-1)*cols+space_l_r-1;                //start index für array
             int field_content;
 
-            memset(array,0, fields);                     //array auf 0 initialisieren
+            int cols_even = (cols-puffer_cols)%2;
+            int rows_even = (rows-puffer_rows)%2;
+            int transfer = 0;
 
-            if (((fields-puffer_size)%2)==1){
+            memset(array,0, fields);                   //array auf 0 initialisieren
+
+            if (((fields-puffer_size)%2)==1 || (cols_even==1) || (rows_even==1)){
                 fprintf(stderr, "\n Mittige Platzierung des Puffers nicht möglich.\n");
-                exit(1);
             }
 
+            if (cols_even == 1) transfer=1;
+
             for (i=0;i<puffer_rows;i++) {                           //Iteration über Reihen des Puffers
-                index=index+puffer_cols+2*space_l_r;            //Sprung um 2*Platz-links/rechts + Spalten des Puffers
+                index=index+puffer_cols+2*space_l_r+transfer;            //Sprung um 2*Platz-links/rechts + Spalten des Puffers
                 for (j=0;j<puffer_cols;j++) {                       //Iteration über Spalten des Puffers
                     field_content= field_content_conversion(puffer[i*puffer_cols+j]);
                     array[index+j+1]=field_content;
@@ -137,8 +135,7 @@ void read_settings(list_header *list,char* path){
                     printf("%i",array[m*cols+n]);
                 }
             }
-
-        };
+        }
 
         if (strcmp(line,"\n")==0) continue;         //Leere Zeile überspringen
 
@@ -154,7 +151,7 @@ void read_settings(list_header *list,char* path){
         }
         else if(strncmp(string,"Schritt:",8)==0) {
             *an_counter = integer,
-            set_animation_counter(list, an_counter);  // warum???
+            set_animation_counter(list, an_counter);
             printf("%i",*get_animation_counter(list));
         }
         else if(strncmp(string,"Schritte",8)==0) {
@@ -176,16 +173,10 @@ void read_settings(list_header *list,char* path){
         if (puffer_reached==1) {                           //Animations-Puffer wurde erreicht
             strcat(puffer,string);                //zusammenfügen der Einzelnen Datei-Puffer Zeilen
             puffer_rows = puffer_rows+1;
-            //printf("\n %s", puffer);
         }
-
     }
 
     perror("\n config");
-
-
-
-
 
 }
 
