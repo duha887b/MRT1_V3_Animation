@@ -4,3 +4,5 @@
 // UI Schnittstelle
 
 #endif //UI_HH
+
+void ui();

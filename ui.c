@@ -11,5 +11,30 @@
 // für die Funktion `exit`
 #include <stdlib.h>
 
+void ui(){
+
+
+    while (grafik_user_input(10) > Fehler);
+
+    switch (grafik_user_input(100))
+    {
+        case Beenden:
+            exit(0); //beenden auf q
+
+        case Pause:
+            // TODO func
+
+        case Schritt:
+            // TODO func
+
+
+        default:
+            //delay
+
+            return;
+
+    }
+
+}
 
 // Funktionen um Nutzerinteraktionen zu behandeln
