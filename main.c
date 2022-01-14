@@ -112,7 +112,7 @@ int main(void)
 
         print_animation_buffer(list);
 
-        cal_nextAnimaionStep(list);
+
 
         // Getätigte Nutzereingaben verarbeiten.
         // 100 Millisekunden auf Nutzereingabe warten,
