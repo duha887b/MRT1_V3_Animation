@@ -127,12 +127,7 @@ void read_settings(list_header *list,char* path){
 
             int m,n;
 
-            for (m=0;m<rows;m++) {
-                printf("\n");
-                for (n=0;n<cols;n++){
-                    printf("%i ",array[m*cols+n]);
-                }
-            }
+
         }
 
 

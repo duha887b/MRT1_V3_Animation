@@ -13,7 +13,7 @@
 
 #include <unistd.h>
 #include "engine.h"
-
+#include "gfx.h"
 
 void ui(list_header* list){
 
@@ -23,6 +23,7 @@ void ui(list_header* list){
     switch (grafik_user_input(100))
     {
         case Beenden:
+            free_all(list);
             exit(0); //beenden auf q
 
         case Pause:
@@ -39,6 +40,8 @@ void ui(list_header* list){
                         return;
                     case Schritt:
                         cal_nextAnimaionStep(list);
+                        print_animation_buffer(list);
+                        continue;
 
                 }
 
@@ -62,6 +65,7 @@ void ui(list_header* list){
                             return;
                         case Schritt:
                             cal_nextAnimaionStep(list);
+                            print_animation_buffer(list);
                             continue;
                     }
 

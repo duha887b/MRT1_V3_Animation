@@ -25,6 +25,7 @@ void cal_nextAnimaionStep(list_header* list){
 
 
 //temp code
+/*
     printf("\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++)
@@ -32,7 +33,7 @@ void cal_nextAnimaionStep(list_header* list){
         printf("\n");
     }
 //
-
+*/
 
 
    for(int r = 0;r<rows;r++){                   // iteriert über die Zeilen des Arrays
@@ -94,6 +95,7 @@ void cal_nextAnimaionStep(list_header* list){
     free(next_array);
 
 // temp
+/*
     printf("_____________________\n");
 
 
@@ -103,7 +105,7 @@ void cal_nextAnimaionStep(list_header* list){
         printf("\n");
     }
         printf("counter:%d",*counter);
-
+*/
 }
 
 

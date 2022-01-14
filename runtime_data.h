@@ -75,5 +75,7 @@ void set_array(list_header* list, int* array);
 //erzeugt ein Array aus Liste mit der Größe (Zeilen+2)*(Spalten+2)
 int* new_array(list_header* list);
 
+void free_all(list_header* list);
+
 
 #endif //MRT1_V3_ANIMATION_RUNTIME_DATA_H

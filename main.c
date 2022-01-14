@@ -26,11 +26,15 @@ int main(void)
     init_exit();
     init_frame(list);
 
+
     while(1){
+
         print_animation_buffer(list);
         ui(list);
 
     }
+
+
 
     return 0;
 }
