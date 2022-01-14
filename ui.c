@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "engine.h"
 
+
 void ui(list_header* list){
 
 
@@ -25,10 +26,46 @@ void ui(list_header* list){
             exit(0); //beenden auf q
 
         case Pause:
-            // TODO func
+        {
+            while(1)
+            {
+                // TODO func
+                while (grafik_user_input(10) > Fehler);
 
+                switch (grafik_user_input(100)) {
+                    case Beenden:
+                        exit(0);
+                    case Pause:
+                        break;
+                }
+                break;
+
+
+            }
+        }
         case Schritt:
             // TODO func
+            {
+                sleep(get_delay(list));
+                cal_nextAnimaionStep(list);
+                while(1)
+                {
+                    while (grafik_user_input(10) > Fehler);
+
+                    switch (grafik_user_input(100))
+                    {
+                        case Beenden:
+                            exit(0);
+                        case Pause:
+                            break;
+                    }
+
+
+
+                }
+            }
+
+
 
 
         default:
