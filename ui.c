@@ -11,7 +11,10 @@
 // für die Funktion `exit`
 #include <stdlib.h>
 
-void ui(){
+#include <unistd.h>
+#include "engine.h"
+
+int ui(list_header* list){
 
 
     while (grafik_user_input(10) > Fehler);
@@ -29,9 +32,15 @@ void ui(){
 
 
         default:
-            //delay
 
-            return;
+            if(get_animation_maxC(list)== *get_animation_counter(list)){
+                return 1;
+            }
+
+            usleep(get_delay(list));
+            cal_nextAnimaionStep(list);
+
+            return 0;
 
     }
 

@@ -50,6 +50,9 @@ void cal_nextAnimaionStep(list_header* list){
                        continue;
                    }
 
+                   if(current_array[m*cols+n] !=1 && current_array[m*cols+n] !=0){
+                       continue;
+                   }
                    tmp_count = tmp_count + (current_array[m*cols+n]);   //addieren der Nachbarpixel
                }
            }
