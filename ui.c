@@ -36,9 +36,12 @@ void ui(list_header* list){
                     case Beenden:
                         exit(0);
                     case Pause:
-                        break;
+                        return;
+                    case Schritt:
+                        cal_nextAnimaionStep(list);
+
                 }
-                break;
+
 
 
             }
@@ -46,7 +49,6 @@ void ui(list_header* list){
         case Schritt:
             // TODO func
             {
-                sleep(get_delay(list));
                 cal_nextAnimaionStep(list);
                 while(1)
                 {
@@ -57,7 +59,10 @@ void ui(list_header* list){
                         case Beenden:
                             exit(0);
                         case Pause:
-                            break;
+                            return;
+                        case Schritt:
+                            cal_nextAnimaionStep(list);
+                            continue;
                     }
 
 
