@@ -21,13 +21,19 @@ int main(void)
 {
     list_header *list = new_specific_list();
     read_settings(list, "./settings-1.txt");
-
+    init_exit();
     init_frame(list);
 
     while(1){
         print_animation_buffer(list);
 
         ui();
+
+        sleep(5);
+
+        if(*get_animation_counter(list)== get_animation_maxC(list)) break;
+        cal_nextAnimaionStep(list);
+
 
 
 

@@ -12,7 +12,7 @@
 
 void init_frame(list_header* list){
     grafik_init_window();
-    grafik_create_paint_area(0, get_X(list),0, get_Y(list), get_X(list), get_Y(list)); // ZEichenfläche initialisieren
+    grafik_create_paint_area(1, get_X(list)+1,1, get_Y(list)+1, get_X(list), get_Y(list)); // ZEichenfläche initialisieren
 
 
 
@@ -31,8 +31,8 @@ void print_animation_buffer(list_header*list) {
 
 
 
-    for (int y = 1; y != get_Y(list); y++) {
-        for(int x = 1; x != get_X(list); x++) {
+    for (int y = 0; y != get_Y(list)+1; y++) {
+        for(int x = 0; x != get_X(list)+1; x++) {
 
             if(animationspuffer[y * cols + x]==1){
                 color = Golden_Fizz;
