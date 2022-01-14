@@ -28,7 +28,7 @@ int main(void)
 
     while(1){
         print_animation_buffer(list);
-        if(ui(list))break;
+        ui(list);
 
     }
 

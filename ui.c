@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "engine.h"
 
-int ui(list_header* list){
+void ui(list_header* list){
 
 
     while (grafik_user_input(10) > Fehler);
@@ -34,13 +34,13 @@ int ui(list_header* list){
         default:
 
             if(get_animation_maxC(list)== *get_animation_counter(list)){
-                return 1;
+                return ;
             }
 
             usleep(get_delay(list));
             cal_nextAnimaionStep(list);
 
-            return 0;
+            return ;
 
     }
 
