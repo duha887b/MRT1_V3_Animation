@@ -30,7 +30,7 @@ void ui(list_header* list){
         {
             while(1)
             {
-                // TODO func
+
                 while (grafik_user_input(10) > Fehler);
 
                 switch (grafik_user_input(100)) {
@@ -53,7 +53,7 @@ void ui(list_header* list){
             }
         }
         case Schritt:
-            // TODO func
+
             {
                 cal_nextAnimaionStep(list);
                 while(1)
