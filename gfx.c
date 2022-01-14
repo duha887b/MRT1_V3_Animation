@@ -40,7 +40,7 @@ void print_animation_buffer(list_header*list) {
             } else if (animationspuffer[y * cols + x]==0){
                 color = Rainforest;
             } else{
-                fprintf(stderr,"can't select color");
+                //fprintf(stderr,"can't select color");
                 color = Brown;
             }
 
