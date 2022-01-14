@@ -23,28 +23,28 @@ void ui(list_header* list){
     switch (grafik_user_input(100))
     {
         case Beenden:
-            free_all(list);
+
             exit(0); //beenden auf q
 
         case Pause:
         {
-            while(1)
+            while(1) //Pause mit Leertaste
             {
 
                 while (grafik_user_input(10) > Fehler);
 
                 switch (grafik_user_input(100)) {
-                    case Beenden:
+                    case Beenden:       //beenden des Programmes in der Pause
                         exit(0);
                     case Pause:
-                        return;
+                        return; //mit Leertaste weitermachen
                     case Schritt:
                         if(get_animation_maxC(list)== *get_animation_counter(list)){
                             continue;
                         }
                         cal_nextAnimaionStep(list);
                         print_animation_buffer(list);
-                        continue;
+                        continue; // in Pause nächsten Animationsschritt zeigen
 
                 }
 
@@ -55,16 +55,16 @@ void ui(list_header* list){
         case Schritt:
 
             {
-                cal_nextAnimaionStep(list);
+                cal_nextAnimaionStep(list); // nächsten Animtionsschritt
                 while(1)
                 {
                     while (grafik_user_input(10) > Fehler);
 
                     switch (grafik_user_input(100))
                     {
-                        case Beenden:
+                        case Beenden: // in Pause Programm beenden
                             exit(0);
-                        case Pause:
+                        case Pause: // in Pause Programm fortsetzen
                             return;
                         case Schritt:
                             if(get_animation_maxC(list)== *get_animation_counter(list)){
@@ -72,7 +72,7 @@ void ui(list_header* list){
                             }
                             cal_nextAnimaionStep(list);
                             print_animation_buffer(list);
-                            continue;
+                            continue; // in Pause nächsten Animationsschritt anzeigen
                     }
 
 
@@ -92,7 +92,7 @@ void ui(list_header* list){
             usleep(get_delay(list));
             cal_nextAnimaionStep(list);
 
-            return ;
+            return ; // normales Ablaufen der Animation
 
     }
 
