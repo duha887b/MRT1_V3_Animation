@@ -23,19 +23,6 @@ void cal_nextAnimaionStep(list_header* list){
     int* counter = get_animation_counter(list); //pointer des Animationszählers holen
 
 
-
-//temp code
-/*
-    printf("\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++)
-            printf("%d ", current_array[i * cols + j]);
-        printf("\n");
-    }
-//
-*/
-
-
    for(int r = 0;r<rows;r++){                   // iteriert über die Zeilen des Arrays
        for(int c = 0; c<cols ;c++){             // iteriert über die Spalten des Arrays
 
@@ -77,15 +64,7 @@ void cal_nextAnimaionStep(list_header* list){
 
        }
    }
-/*
-   printf("_____________________\n");
 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++)
-            printf("%d ", next_array[i * cols + j]);
-        printf("\n");
-    }
-*/
     *counter = *counter+1;  // erhöhen des Animationszählers um 1 bei erfolgreichem Durchschreiten der Berechnung
 
     // kopieren des berechneten Arrays auf den Speicher des Arrays aus der Liste
@@ -94,18 +73,6 @@ void cal_nextAnimaionStep(list_header* list){
     // freigeben des speichers von dem lokal, temporär genutzten Arrays
     free(next_array);
 
-// temp
-/*
-    printf("_____________________\n");
-
-
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++)
-            printf("%d ", current_array[i * cols + j]);
-        printf("\n");
-    }
-        printf("counter:%d",*counter);
-*/
 }
 
 
