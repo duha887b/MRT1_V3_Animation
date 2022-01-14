@@ -39,6 +39,9 @@ void ui(list_header* list){
                     case Pause:
                         return;
                     case Schritt:
+                        if(get_animation_maxC(list)== *get_animation_counter(list)){
+                            continue;
+                        }
                         cal_nextAnimaionStep(list);
                         print_animation_buffer(list);
                         continue;
@@ -64,6 +67,9 @@ void ui(list_header* list){
                         case Pause:
                             return;
                         case Schritt:
+                            if(get_animation_maxC(list)== *get_animation_counter(list)){
+                                continue;
+                            }
                             cal_nextAnimaionStep(list);
                             print_animation_buffer(list);
                             continue;
