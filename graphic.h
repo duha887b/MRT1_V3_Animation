@@ -124,10 +124,6 @@ int grafik_paint_point(double x, double y,
 */
 user_input_t grafik_user_input(int timeout);
 
-/*--- Demonstration für den Einstieg in die Praktikumsaufgabe --------------*/
-
-// Demonstrationsfunktion, bitte nicht im eigenen Projekt verwenden.
-void farb_demonstration(void);
 
 #endif /* GRAFIK__H */
 /* EOF GRAFIK__H */
