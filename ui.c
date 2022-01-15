@@ -89,7 +89,7 @@ void ui(list_header* list){
                 return ;
             }
 
-            usleep(get_delay(list));
+            sleep(get_delay(list)/1000);
             cal_nextAnimaionStep(list);
 
             return ; // normales Ablaufen der Animation
