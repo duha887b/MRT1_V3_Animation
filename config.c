@@ -54,8 +54,8 @@ void read_settings(list_header *list,char* path){
     file = fopen(path,"r");
 
     char * line = NULL;
-    char string[256];
-    char puffer[256];
+    char string[256] = "";
+    char puffer[256] = "";
     int integer = 0;
     int puffer_reached = 0;
     int puffer_rows = 0;
@@ -125,8 +125,18 @@ void read_settings(list_header *list,char* path){
 
             set_array(list, array); //array zu Laufzeit Daten hinzufügen
 
+
+            /*
             int m,n;
 
+            for (m=0;m<rows;m++) {
+            	printf("\n");
+            	for (n=0;n<cols;n++){
+            		printf("%i ",array[m*cols+n]);
+            	}
+
+            }
+			*/
 
         }
 
@@ -160,7 +170,7 @@ void read_settings(list_header *list,char* path){
         }
 
         if (puffer_reached==1) {                           //Animations-Puffer wurde erreicht
-            strcat(puffer,string);                //zusammenfügen der Einzelnen Datei-Puffer Zeilen
+            strcat(puffer,string);              //zusammenfügen der Einzelnen Datei-Puffer Zeilen
             puffer_rows = puffer_rows+1;
         }
     }
