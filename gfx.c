@@ -41,7 +41,7 @@ void print_animation_buffer(list_header*list) {
                 color = Rainforest;
             } else{
                 //fprintf(stderr,"can't select color");
-                color = Brown;
+                //color = Brown;
             }
 
 
