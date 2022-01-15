@@ -26,16 +26,25 @@ int field_content_conversion(char c) {
 long getdelay_ms (char string[]){       //Bestimmen des Delays(Pause) in ms
     int tmp=0,i=0;
     float f=0;
-    long f_l;
-    unsigned long length = strlen(string);
+    long f_l=0;
 
     while (tmp<1) {
         int cmp = (unsigned char) string[i];
         if (cmp>47 && cmp<58) {tmp=1;break;}        //überprüfen ob char eine Zahl ist
         i++;
     }
-    const char *end_float = &string[length-i+1];    //string vor Pause entfernen
-    sscanf(end_float,"%f",&f);             //float aus übrigem string bestimmen
+    const char *end_float = &string[i];    //string vor Pause entfernen
+    sscanf(end_float,"%f",&f);            //float aus übrigem string bestimmen
+
+    if (f==0) {
+    	int f_i = 0;
+    	printf(end_float);
+    	sscanf(end_float,"%i",&f_i);
+    	f_i = f_i*1000;
+    	f_l = (long) f_i;
+    	return f_l;
+    }
+
 
     f=roundf((f*1000));                            //s to ms
     f_l = (long) f;
