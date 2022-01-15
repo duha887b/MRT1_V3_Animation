@@ -20,7 +20,7 @@ void ui(list_header* list){
 
     while (grafik_user_input(10) > Fehler);
 
-    switch (grafik_user_input(100))
+    switch (grafik_user_input(get_delay(list)))
     {
         case Beenden:
 
@@ -33,7 +33,7 @@ void ui(list_header* list){
 
                 while (grafik_user_input(10) > Fehler);
 
-                switch (grafik_user_input(100)) {
+                switch (grafik_user_input(get_delay(list))) {
                     case Beenden:       //beenden des Programmes in der Pause
                         exit(0);
                     case Pause:
@@ -60,7 +60,7 @@ void ui(list_header* list){
                 {
                     while (grafik_user_input(10) > Fehler);
 
-                    switch (grafik_user_input(100))
+                    switch (grafik_user_input(get_delay(list)))
                     {
                         case Beenden: // in Pause Programm beenden
                             exit(0);
@@ -89,7 +89,7 @@ void ui(list_header* list){
                 return ;
             }
 
-            sleep(get_delay(list)/1000);
+            
             cal_nextAnimaionStep(list);
 
             return ; // normales Ablaufen der Animation
