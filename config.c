@@ -63,12 +63,15 @@ void read_settings(list_header *list,char* path){
     file = fopen(path,"r");
 
     char * line = NULL;
-    char string[256] = "";
-    char puffer[256] = "";
+    char *string;
+    string = malloc(1);
+
+    char *puffer;
     int integer = 0;
     int puffer_reached = 0;
     int puffer_rows = 0;
     size_t len = 0;
+    ssize_t line_length;
 
     // Fehlererkennung
     unsigned long length = strlen(path);
@@ -89,11 +92,15 @@ void read_settings(list_header *list,char* path){
     //Ende Fehlererkennung
 
 
-    while ((getline(&line, &len, file)) != -1) {
+    while ((line_length=getline(&line, &len, file)) != -1) {
+
 
         integer = 0;
 
+        string = realloc(string,line_length+1);
+
         sscanf(line, "%s %i", &string[0],&integer);
+
 
         if (strcmp(line,"\n")==0 && puffer_reached==1) {         //Prüfen auf Ende des Dokuments
 
@@ -135,7 +142,7 @@ void read_settings(list_header *list,char* path){
             set_array(list, array); //array zu Laufzeit Daten hinzufügen
 
 
-            /*
+
             int m,n;
 
             for (m=0;m<rows;m++) {
@@ -145,7 +152,7 @@ void read_settings(list_header *list,char* path){
             	}
 
             }
-			*/
+
 
         }
 
@@ -159,32 +166,40 @@ void read_settings(list_header *list,char* path){
         else if(strncmp(string,"Spalten",7)==0) {
             *x = integer;
             set_X(list,x);
+            //printf("x", get_X(list));
         }
         else if(strncmp(string,"Schritt:",8)==0) {
             *an_counter = integer,
             set_animation_counter(list, an_counter);
+            //printf("counter", get_animation_counter(list));
         }
         else if(strncmp(string,"Schritte",8)==0) {
             *an_max = integer;
             set_animation_maxC(list, an_max);
+            //printf("x", get_animation_maxC(list));
         }
         else if(strncmp(string,"Pause",5)==0) {
             long tmp = getdelay_ms(line);
             *delay= tmp;
             set_delay(list, delay);
+            //printf("delay", get_delay(list));
         }
         else if(strncmp(string, "Animations-Puffer",16)==0) {
             puffer_reached = 1;
+            puffer=malloc((get_X(list)+2)*(get_Y(list)+2));
+            //printf("\npuffer_reached:%i",puffer_reached);
             continue;
         }
 
         if (puffer_reached==1) {                           //Animations-Puffer wurde erreicht
             strcat(puffer,string);              //zusammenfügen der Einzelnen Datei-Puffer Zeilen
             puffer_rows = puffer_rows+1;
+            printf("\nAnimationspuffer:%s",puffer);
         }
     }
 
      perror("\n config");
+
 
 }
 
