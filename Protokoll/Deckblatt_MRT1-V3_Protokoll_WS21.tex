@@ -1,0 +1,89 @@
+%;; -*- mode:latex-mode -*-
+% Author: M.Herhold
+% Version: 0.5
+
+\documentclass[oneside,a4paper,12pt]{article}
+\pagestyle{empty}
+
+\usepackage{german}
+\usepackage{changepage}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+
+\usepackage[default,scale=1.0]{opensans} %% Offizielle TU-DD Schriftart
+\usepackage[T1]{fontenc}
+
+% einrückungen bei nächster Zeile verhindern
+\parindent0pt
+\setlength{\parindent}{0pt} 
+\setlength{\parskip}{\baselineskip}
+
+%%%%%%%%%%%
+% folgende Zeilen bitte ausfüllen:
+%
+
+\def\Betreuer{M. Herhold}
+\def\Gruppennummer{ ??  }
+\def\DatumDerDurchführung{Datum hier}
+
+% bitte die Namen der Studenten der Gruppe eintragen (keine Matrikelnummern)
+% Namensfeld einfach leer lassen, wenn weniger Mitglieder in der Gruppe sind.
+\def\StudentEins{Bitte 1. Namen hier eintragen!}
+\def\StudentZwei{Bitte 2. Namen hier eintragen!}
+\def\StudentDrei{Bitte 3. Namen hier eintragen!}
+\def\StudentVier{Bitte 4. Namen hier eintragen!}
+
+%
+% keine Änderungen ab hier notwendig
+%%%%%%%%%%%
+
+%
+% change code below only if you know what you are doing!
+% Feedback and code improvements are very welcome.
+% mail to M.Herhold, TU-Dresden, Institute of Automation
+%
+\begin{document}
+
+\begin{center}
+    {\Huge \textbf{Praktikumsprotokoll}\\}
+    \bigskip
+    {\Large Mikrorechentechnik I}\\
+\end{center}
+
+\vfill
+
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabularx}{\textwidth}{p{2cm} X}
+    \textbf{Versuch:} & Versuch 3: C--Programmierung \\[3em]
+  \textbf{Betreuer:} & \Betreuer \\ \cline{2-2}
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{p{2cm} p{0.38cm} X p{2.2cm}}
+  \textbf{Gruppe:} & \Gruppennummer & \hfill \textbf{Datum} {\small der Praktikumsdurchführung}\textbf{:} & \DatumDerDurchführung \\
+  \cline{2-2} \cline{4-4}
+\end{tabularx}
+
+\vfill
+
+\renewcommand{\arraystretch}{3}
+\rule{\textwidth}{0.5mm}
+\begin{tabularx}{\textwidth}{p{4.2cm} | p{0.5cm} X p{0.5cm}}
+  & & \StudentEins & \\ \cline{3-3}
+  \textbf{Gruppenmitglieder:} & & \StudentZwei & \\  \cline{3-3}
+  & & \StudentDrei & \\  \cline{3-3}
+  & & \StudentVier & \\  \cline{3-3}
+%  &\\
+\end{tabularx}
+
+\vfill
+\vfill
+\renewcommand{\arraystretch}{1}
+Informationen zur Abgabe des Protokolls:\\[0.8em]
+{\small
+    \begin{tabularx}{\textwidth}{p{2.4cm} X}
+        Abgabetermin:    & eine Woche nach Praktikumstermin\\[0.6em]
+        Abgabeart:       & als PDF per E-Mail an: mario.herhold [ a ] tu-dresden.de\\
+    \end{tabularx}}
+
+\end{document}
