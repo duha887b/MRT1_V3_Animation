@@ -8,13 +8,45 @@ start
           read_settings();
 :**initialisieren der Ausgaben,wenn das Programm beendet wird**
                                               init_exit();
-while (1)
+:**initialisieren des Ausgabefensters**
+                     init_frame();
+while (**1**)
 :**Daten des Animationspuffers in Fenster ausgeben**
                       print_animation_buffer();
+while(nächtes zu zeichnendes Pixel)
+
+if (Pixel == 1) then (ja)
+  :Pixel in Golden_Fizz zeichnen;
+  else (nein)
+  :Pixel in Rainforest zeichnen;
+endif
+
+endwhile(alle Pixel gezeichnet)
 :**Nutzereingaben verarbeiten**
                       ui();
+
+switch (Tastatureingabe)
+case ( Beenden (q))
+  stop
+case ( Pause (Leertaste))
+  :Programm pausiert bis wieder Leertaste;
+case ( Pause & Nächster Schritt (.) )
+  :                              Programm pausiert
+   Darstellung & Berechnung des nächsten Animationsschritts
+
+                             cal_nextAnimationStep()
+                             print_animation_buffer();
+case ( default)
+  :**Berechnung des nächsten Animationsschritts**
+                       cal_nextAnimationStep();
+
+endswitch
+
 endwhile;
 
 stop
+
+
+
 
 @enduml
