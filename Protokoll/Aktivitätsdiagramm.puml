@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:**neue Liste für Daten erstellen**
+             new_specific_list();
+:**einlesen der settings.txt**
+          read_settings();
+:**initialisieren der Ausgaben,wenn das Programm beendet wird**
+                                              init_exit();
+while (1)
+:**Daten des Animationspuffers in Fenster ausgeben**
+                      print_animation_buffer();
+:**Nutzereingaben verarbeiten**
+                      ui();
+endwhile;
+
+stop
+
+@enduml
