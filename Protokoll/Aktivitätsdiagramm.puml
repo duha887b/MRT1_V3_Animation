@@ -2,6 +2,7 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
+
 :**neue Liste für Daten erstellen**
              new_specific_list();
 :**einlesen der settings.txt**
@@ -30,15 +31,18 @@ case ( Beenden (q))
   stop
 case ( Pause (Leertaste))
   :Programm pausiert bis wieder Leertaste;
-case ( Pause & Nächster Schritt (.) )
+case (           Pause & nächster Schritt (.) )
   :                              Programm pausiert
    Darstellung & Berechnung des nächsten Animationsschritts
 
                              cal_nextAnimationStep()
                              print_animation_buffer();
+
 case ( default)
   :**Berechnung des nächsten Animationsschritts**
                        cal_nextAnimationStep();
+  :Programm pausiert bestimmte Zeit;
+
 
 endswitch
 
@@ -47,6 +51,29 @@ endwhile;
 stop
 
 
+start
+:**cal_nextAnimationStep**;
+while(iteration über alle Pixel des Animationspuffers)
+while(iteration über die Nachbarn des aktuellen Pixels)
+if(Nachbarpixel == 1) then(ja)
+:belegte Nachbarn +1;
+elseif(Nachbarpixel liegt außerhalb des Animationspuffers)
+endif
+endwhile(fertig)
+if(aktuelles Pixel == 0 && belegte Nachbarn == 3)then(ja)
+:selbes Pixel im neuem Animationspuffer == 1;
+elseif(aktuelles Pixel == 1 && belegte Nachbarn == 2||3)then(ja)
+:selbes Pixel im neuem Animationspuffer == 1;
+elseif(aktuelles Pixel == 1 && belegte Nachbarn < 2)then(ja)
+:selbes Pixel im neuem Animationspuffer == 0;
+elseif(aktuelles Pixel == 1 && belegte Nachbarn > 3)then(ja)
+:selbes Pixel im neuem Animationspuffer == 0;
+endif
+
+endwhile(fertig)
+:überschreiben des Animationspuffers mit dem neu berechnetem Animationspuffer ;
+:Animationszähler +1;
+stop
 
 
 @enduml
