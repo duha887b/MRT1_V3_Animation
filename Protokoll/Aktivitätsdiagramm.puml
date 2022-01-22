@@ -7,6 +7,35 @@ start
              new_specific_list();
 :**einlesen der settings.txt**
           read_settings();
+while(Zeileninhalt vorhanden)
+:String und Zahl einlesen;
+switch(String)
+    case (Zeilenumbruch)
+    :überspringen
+
+    continue;
+    case (Zeilen)
+    :X setzen;
+    case (Spalten)
+    :Y setzen;
+    case (Schritt)
+    :Counter setzen;
+    case (Schritte)
+    :maximalen Counter setzen;
+    case (Pause)
+    :Verzögerung(delay) setzen;
+    case (Animationspuffer)
+    :Puffer erreicht = 1
+    
+    continue;
+endswitch
+if (puffer erreicht)
+:Zeilen des Puffers zusammenfügen; 
+else if (puffer erreicht && Zeilenumbruch)
+:Puffer mittig in Pixel-Array einfügen; 
+endif
+endwhile
+
 :**initialisieren der Ausgaben,wenn das Programm beendet wird**
                                               init_exit();
 :**initialisieren des Ausgabefensters**
